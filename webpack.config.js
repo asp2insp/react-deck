@@ -55,6 +55,10 @@ var config = {
 
     loaders: [
       {
+        test: /\.jade$/,
+        loader: 'jade-loader'
+      },
+      {
         test: /\.css$/,
         loader: 'style-loader!css-loader!' + AUTOPREFIXER_LOADER
       },
