@@ -1,9 +1,9 @@
-var testSlidesStore = require("./components/testSlidesStore.js");
-var Reactor = require('nuclear-js').Reactor;
+var testSlidesStore = require("./components/testSlides/testSlidesStore.js");
+var Reactor = require("nuclear-js").Reactor;
 
 var reactor = Reactor({
   stores: {
-    testSlidesStore: testSlidesStore,
+    slides: testSlidesStore
   }
 });
 
