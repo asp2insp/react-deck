@@ -27,6 +27,4 @@ var testSlidesStore = Store({
   }
 });
 
-module.exports = {
-  testSlidesStore: testSlidesStore
-};
+module.exports = testSlidesStore;

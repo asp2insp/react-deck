@@ -2,14 +2,16 @@ var Presenter = require("../presenter/presenter.jsx");
 var React = require("react");
 var $ = require("jquery");
 var reactor = require('../../reactor.js');
-var Getter = require('nuclear-js').Getter
+var testSlidesStore = require("./testSlidesStore.js");
 
-var getSlides = Getter('slides', slidesMap => {
-  return slidesMap.slides;
+reactor.registerStores({
+  slides: testSlidesStore
 });
 
+var getSlides = ['slides', 'slides'];
+
 var createSlides = function() {
-  var slides = reactor.get(getSlides);
+  var slides = reactor.evaluate(getSlides);
   return (
     <Presenter slides={slides} />
   );
