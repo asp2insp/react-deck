@@ -5,7 +5,6 @@ var $ = require("jquery");
 
 var testSlidesStore = Store({
   getInitialState: function() {
-    //var rootSelector = "article";
     var slideSelector = "section";
     $("body").append($("<div id=\"rd-hidden-content\">"));
     $(jadeContent()).appendTo($("#rd-hidden-content"));
