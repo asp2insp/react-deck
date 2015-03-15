@@ -18,11 +18,7 @@ var testSlidesStore = Store({
   },
 
   initialize: function() {
-    // this will get called via `reactor.dispatch('createSlides')`
-    // where the payload is a list of slides
-    this.on("createSlides", function(slides) {
-      return slides;
-    });
+
   }
 });
 
