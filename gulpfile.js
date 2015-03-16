@@ -3,6 +3,9 @@ var gutil = require("gulp-util");
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
 var webpackConfig = require("./webpack.config.js");
+var jest = require("gulp-jest");
+var print = require("gulp-print");
+require('harmonize')()
 
 // The development server (the recommended option for development)
 gulp.task("default", ["webpack-dev-server"]);
@@ -78,4 +81,30 @@ gulp.task("webpack-dev-server", function(callback) {
 		if(err) throw new gutil.PluginError("webpack-dev-server", err);
 		gutil.log("[webpack-dev-server]", "http://localhost:8080/webpack-dev-server/index.html");
 	});
+});
+
+
+gulp.task('jest', function () {
+    return gulp.src('src/components/*/__tests__/')
+    .pipe(print())
+    .pipe(jest({
+    		rootDir: "./",
+        scriptPreprocessor: "<rootDir>/src/tests/jestPreprocessor.js",
+        unmockedModulePathPatterns: [
+            "node_modules/react",
+            "node_modules/classnames"
+        ],
+        testPathIgnorePatterns: [
+            "node_modules",
+            "spec"
+        ],
+        moduleFileExtensions: [
+            "js",
+            "jsx"
+        ],
+        testFileExtensions: [
+        	"js",
+        	"jsx"
+        ]
+    }));
 });

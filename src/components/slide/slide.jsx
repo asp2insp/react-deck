@@ -11,7 +11,7 @@ var Slide = React.createClass({
       "mini": !isPresentationMode
     }
     // Render the user class
-    if (typeof(this.props.userClass) != undefined) {
+    if (typeof this.props.userClass !== "undefined") {
       classObj[this.props.userClass] = true;
     }
     var classes = cx(classObj);
