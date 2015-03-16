@@ -40,6 +40,7 @@ module.exports = {
       .waitForElementVisible(slide0, 1000)
       .assert.cssClassPresent(slide0, "fullscreen")
 
+      // Assert trying to go to the previous slide on the first slide doesn't do anything
       .click('#previous')
       .waitForElementVisible(slide0, 1000)
       .assert.cssClassPresent(slide0, "fullscreen")

@@ -23,7 +23,7 @@ var Slide = React.createClass({
         <div dangerouslySetInnerHTML={{__html: slideInnerMarkup}}></div>
       </div>
     );
-  }
+  },
 });
 
 module.exports = Slide;
