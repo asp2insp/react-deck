@@ -25,6 +25,16 @@ describe('Slide', function() {
     expect(slideDomElement.className).toEqual("slide mini");
   });
 
+  it('has fullscreen and current classes when focused in presentation mode', function() {
+    // Render a slide in overview mode
+    var slideInstance = TestUtils.renderIntoDocument(<Slide mode="presentation" isCurrentSlide={true} />);
+
+    // Verify that the slide has the required classes
+    var slideDomElement = slideInstance.getDOMNode();
+    expect(slideDomElement).toBeDefined();
+    expect(slideDomElement.className).toEqual("slide fullscreen current-slide");
+  });
+
   it('contains the inner markup', function() {
     // Render a slide with inner markup
     var slideInstance = TestUtils.renderIntoDocument(<Slide markup="<p>Hello World!</p>" />);

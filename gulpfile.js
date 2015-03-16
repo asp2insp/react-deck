@@ -5,6 +5,8 @@ var WebpackDevServer = require("webpack-dev-server");
 var webpackConfig = require("./webpack.config.js");
 var jest = require("gulp-jest");
 var print = require("gulp-print");
+var shell = require("gulp-shell");
+var spawn = require("child_process").spawn;
 require('harmonize')()
 
 // The development server (the recommended option for development)
@@ -107,4 +109,18 @@ gulp.task('jest', function () {
         	"jsx"
         ]
     }));
+});
+
+gulp.task('nightwatch', function() {
+    return gulp.src('', {read: false})
+    .pipe(shell([
+      'nightwatch -e default',
+      'nightwatch -e chrome'
+    ], {
+      templateData: {
+        f: function (s) {
+          return s.replace(/$/, '.bak')
+        }
+      }
+    }))
 });

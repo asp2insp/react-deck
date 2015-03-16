@@ -8,7 +8,8 @@ var Slide = React.createClass({
     var classObj = {
       "slide": true,
       "fullscreen": isPresentationMode && this.props.isCurrentSlide,
-      "mini": !isPresentationMode
+      "mini": !isPresentationMode,
+      "current-slide": this.props.isCurrentSlide,
     }
     // Render the user class
     if (typeof this.props.userClass !== "undefined") {
@@ -16,8 +17,9 @@ var Slide = React.createClass({
     }
     var classes = cx(classObj);
     var slideInnerMarkup = this.props.markup;
+    var index = this.props.index;
     return (
-      <div className={classes}>
+      <div className={classes} data-index={index}>
         <div dangerouslySetInnerHTML={{__html: slideInnerMarkup}}></div>
       </div>
     );

@@ -37,7 +37,7 @@ var Presenter = React.createClass({
     _.forEach(this.props.slides, function(html, index) {
       var isCurrentSlide = currentSlideIndex == index;
       nodes.push(
-        <Slide markup={html} isCurrentSlide={isCurrentSlide} userClass={userClass} mode={mode} />
+        <Slide markup={html} isCurrentSlide={isCurrentSlide} userClass={userClass} mode={mode} index={index} />
       );
     });
     return (
@@ -46,9 +46,9 @@ var Presenter = React.createClass({
           {nodes}
         </div>
         <div className="controls">
-          <button type="button" onClick={this.goPrevious} >Previous</button>
-          <button type="button" onClick={this.toggleMode} >Toggle Mode</button>
-          <button type="button" onClick={this.goNext} >Next</button>
+          <button id="previous" type="button" onClick={this.goPrevious} >Previous</button>
+          <button id="toggle" type="button" onClick={this.toggleMode} >Toggle Mode</button>
+          <button id="next" type="button" onClick={this.goNext} >Next</button>
         </div>
       </div>
     );
