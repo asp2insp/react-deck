@@ -1,8 +1,15 @@
 var React = require("react");
 var cx = require("classnames");
 require("./slide.less");
+var reactor = require("../../reactor.js");
 
 var Slide = React.createClass({
+  onClick: function() {
+    if (this.props.mode === "overview") {
+      reactor.dispatch("setCurrentSlide", this.props.index);
+      reactor.dispatch("toggleMode");
+    }
+  },
   render: function() {
     var isPresentationMode = this.props.mode == "presentation";
     var classObj = {
@@ -19,7 +26,7 @@ var Slide = React.createClass({
     var slideInnerMarkup = this.props.markup;
     var index = this.props.index;
     return (
-      <div className={classes} data-index={index}>
+      <div className={classes} data-index={index} onClick={this.onClick}>
         <div dangerouslySetInnerHTML={{__html: slideInnerMarkup}}></div>
       </div>
     );

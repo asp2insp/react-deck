@@ -22,6 +22,9 @@ var presenterStore = Nuclear.Store({
       var nextIndex = state.get("currentSlide") + 1;
       return state.set("currentSlide", nextIndex);
     });
+    this.on("setCurrentSlide", function(state, input) {
+      return state.set("currentSlide", input);
+    });
   }
 });
 
