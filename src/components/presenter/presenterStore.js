@@ -3,8 +3,14 @@ var Immutable = require("immutable");
 
 var presenterStore = Nuclear.Store({
   getInitialState: function() {
+    var hash = window.location.hash;
+    if (hash.length > 1) {
+      hash = parseInt(hash.substr(1));
+    } else {
+      hash = 0;
+    }
     return Immutable.Map({
-      currentSlide: 0,
+      currentSlide: hash,
       mode: "presentation"
     });
   },
@@ -16,13 +22,16 @@ var presenterStore = Nuclear.Store({
     });
     this.on("goPrevious", function(state) {
       var nextIndex = Math.max(state.get("currentSlide") - 1, 0);
+      window.location.hash = "#" + nextIndex;
       return state.set("currentSlide", nextIndex);
     });
     this.on("goNext", function(state) {
       var nextIndex = state.get("currentSlide") + 1;
+      window.location.hash = "#" + nextIndex;
       return state.set("currentSlide", nextIndex);
     });
     this.on("setCurrentSlide", function(state, input) {
+      window.location.hash = "#" + input;
       return state.set("currentSlide", input);
     });
   }
