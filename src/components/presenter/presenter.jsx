@@ -29,19 +29,38 @@ var Presenter = React.createClass({
   goNext: function() {
     reactor.dispatch("goNext");
   },
+  handleKeyPress: function(e) {
+    console.log(e.keyCode)
+    if (e.keyCode === 39) {
+      reactor.dispatch("goNext");
+    } else if (e.keyCode === 37) {
+      reactor.dispatch("goPrevious");
+    } else if (e.keyCoe === 38) {
+      reactor.dispatch("toggleMode");
+    } else {
+      return false;
+    }
+    return true;
+  },
   render: function() {
     var currentSlideIndex = this.state.currentSlide;
     var userClass = this.props.userClass;
     var mode = this.state.mode;
     var nodes = []
+    var keyHandler = this.handleKeyPress;
     _.forEach(this.props.slides, function(html, index) {
       var isCurrentSlide = currentSlideIndex == index;
       nodes.push(
-        <Slide markup={html} isCurrentSlide={isCurrentSlide} userClass={userClass} mode={mode} index={index} />
+        <Slide markup={html}
+               isCurrentSlide={isCurrentSlide}
+               userClass={userClass}
+               mode={mode}
+               index={index}
+               key={index} />
       );
     });
     return (
-      <div className="presenter">
+      <div className="presenter" onKeyUp={keyHandler}>
         <div className="slide-container">
           {nodes}
         </div>
