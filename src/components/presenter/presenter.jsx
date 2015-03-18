@@ -11,6 +11,19 @@ reactor.registerStores({
   presenter: presenterStore
 });
 
+window.document.onkeydown = function(e) {
+    if (e.keyCode === 39) {
+      reactor.dispatch("goNext");
+    } else if (e.keyCode === 37) {
+      reactor.dispatch("goPrevious");
+    } else if (e.keyCode === 38 || e.keyCode === 40) {
+      reactor.dispatch("toggleMode");
+    } else {
+      return true;
+    }
+    return false;
+  };
+
 var Presenter = React.createClass({
   mixins: [NuclearReactMixin(reactor)],
   // simply implement this function to keep a components state
@@ -29,19 +42,6 @@ var Presenter = React.createClass({
   },
   goNext: function() {
     reactor.dispatch("goNext");
-  },
-  handleKey: function(e) {
-    console.log(e.keyCode)
-    if (e.keyCode === 39) {
-      reactor.dispatch("goNext");
-    } else if (e.keyCode === 37) {
-      reactor.dispatch("goPrevious");
-    } else if (e.keyCoe === 38) {
-      reactor.dispatch("toggleMode");
-    } else {
-      return false;
-    }
-    return true;
   },
   render: function() {
     var currentSlideIndex = this.state.currentSlide;
@@ -65,7 +65,7 @@ var Presenter = React.createClass({
       "overview": mode === "overview"
     });
     return (
-      <div className="presenter" onKeyDown={this.handleKey} onKeyDownCapture={this.handleKey}>
+      <div className="presenter">
         <div className={containerClasses} >
           {nodes}
         </div>
