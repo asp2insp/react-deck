@@ -6,8 +6,12 @@
 }
 
 .test-slide .content {
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: 1.8em;
+  padding-right: 1.8em;
+}
+
+.test-slide ol, .test-slide ul {
+  font-size: 1.25em;
 }
 
 .test-slide h1 {
@@ -19,12 +23,32 @@
   color: #EEE
 }
 
- .content.title-slide {
+.test-slide h6 {
+  bottom: 0;
+}
+
+.white {
+  color: #EEE;
+}
+
+.content.title-slide {
   display:flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
   align-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.content.list-slide {
+  display:flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: flex-start;
   align-items: center;
   width: 100%;
   height: 100%;

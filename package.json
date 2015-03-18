@@ -11,25 +11,6 @@
     "nuclear-react-mixin": "file:../../../../var/folders/1b/4_2br0y911lfjsg_p5k8xhnh0000gn/T/npm-9059-7dd6f6dd/git-cache-1b7acd8cd6c6/0fc5b84198fec04d6cd6db2c0e02242c9fe609d3",
     "react": "^0.12.2"
   },
-  "jest": {
-    "rootDir": "./",
-    "scriptPreprocessor": "<rootDir>/src/tests/jestPreprocessor.js",
-    "unmockedModulePathPatterns": [
-      "node_modules/react",
-      "node_modules/classnames"
-    ],
-    "testPathIgnorePatterns": [
-      "node_modules"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "testFileExtensions": [
-      "js",
-      "jsx"
-    ]
-  },
   "devDependencies": {
     "autoprefixer-loader": "^1.2.0",
     "babel": "^4.7.3",

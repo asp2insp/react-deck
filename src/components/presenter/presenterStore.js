@@ -1,42 +1,38 @@
 var Nuclear = require("nuclear-js");
 var Immutable = require("immutable");
+var Hash = require("../hash/hash.js");
 
 var presenterStore = Nuclear.Store({
+  _hashImpl: Hash,
   getInitialState: function() {
-    var hash = window.location.hash;
-    if (hash.length > 1) {
-      hash = parseInt(hash.substr(1));
-    } else {
-      hash = 0;
-    }
+    var hashString = this._hashImpl.getHash() || 0;
     return Immutable.Map({
-      currentSlide: hash,
+      currentSlide: parseInt(hashString),
       mode: "presentation"
     });
   },
 
   initialize: function() {
+    var self = this;
     this.on("toggleMode", function(state) {
       var newMode = state.get("mode") === "presentation" ? "overview" : "presentation";
       return state.set("mode", newMode);
     });
     this.on("goPrevious", function(state) {
       var nextIndex = Math.max(state.get("currentSlide") - 1, 0);
-      window.location.hash = "#" + nextIndex;
+      self._hashImpl.setHash(nextIndex);
       return state.set("currentSlide", nextIndex);
     });
     this.on("goNext", function(state) {
       var nextIndex = state.get("currentSlide") + 1;
-      window.location.hash = "#" + nextIndex;
+      self._hashImpl.setHash(nextIndex);
       return state.set("currentSlide", nextIndex);
     });
     this.on("setCurrentSlide", function(state, input) {
-      window.location.hash = "#" + input;
+      self._hashImpl.setHash(input);
       return state.set("currentSlide", input);
     });
   }
 });
-
-
 
 module.exports = presenterStore;

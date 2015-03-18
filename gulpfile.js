@@ -86,7 +86,7 @@ gulp.task("webpack-dev-server", function(callback) {
 });
 
 
-gulp.task('jest', function () {
+gulp.task('jest-unit', function () {
     return gulp.src('src/components/*/__tests__/')
     .pipe(print())
     .pipe(jest({
@@ -100,6 +100,9 @@ gulp.task('jest', function () {
             "node_modules",
             "spec"
         ],
+        testPathDirs: [
+            "<rootDir>/src/components"
+        ],
         moduleFileExtensions: [
             "js",
             "jsx"
@@ -107,6 +110,39 @@ gulp.task('jest', function () {
         testFileExtensions: [
         	"js",
         	"jsx"
+        ]
+    }));
+});
+
+
+
+gulp.task('jest-integration', function () {
+    return gulp.src('integration_tests/*')
+    .pipe(print())
+    .pipe(jest({
+        rootDir: "./",
+        scriptPreprocessor: "<rootDir>/src/tests/jestPreprocessor.js",
+        testDirectoryName: "integration_tests",
+        unmockedModulePathPatterns: [
+            "node_modules/react",
+            "node_modules/classnames",
+            "node_modules/nuclear",
+            "node_modules/nuclear-react-mixin"
+        ],
+        testPathIgnorePatterns: [
+            "node_modules",
+            "nightwatch_tests",
+        ],
+        moduleFileExtensions: [
+            "js",
+            "jsx"
+        ],
+        testPathDirs: [
+            "<rootDir>/integration_tests"
+        ],
+        testFileExtensions: [
+          "js",
+          "jsx"
         ]
     }));
 });

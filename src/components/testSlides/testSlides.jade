@@ -1,11 +1,11 @@
 article
   section
-    div.content.title-slide
+    .content.title-slide
       h1 Introduction to Automated Testing
       h2 Or, how to move fast without breaking things
   section
     h1 Automated Testing
-    div.content
+    .content
       h2 Why write automated tests?
       ul
         li Saves time and money by reducing or eliminating the need for manual QA staff
@@ -13,31 +13,101 @@ article
         li Improves morale and confidence
   section
     h1 Types of Automated Tests
-    div.content
-      ol
-        li Unit Tests
-        li Integration Tests
-        li Acceptance/Functional/End To End Tests
-        li Regression Tests
+    .content.list-slide
+      h3.center Unit Tests
+      h3.center Integration Tests
+      h3.center End to End Tests
+  section
+    h1 Aside - Jargon
+    .content
+      h3 Blackbox
+      h4 A test which treats the code under test as an impenetrable black box. Uses only public APIs
+        |or visible interactions to run the test.
+      h3.white Whitebox
+      h4.white A test written with knowledge of the internal workings of the code under test.
+        |It may read or set private variables and internal state in order to run the test.
   section
     h1 Unit Testing
-    div.content
+    .content
+      h3 A unit test...
+      ul
+        li Tests a single function in isolation
+        li Verifies an explicit output for an explicit input
+      h3 Organization
+      ul
+        li You should have a collection of unit tests for each function
+        li Each unit test should only test 1 or 2 inputs
+        li Each test should have a verbose and descriptive name
+  section
+    h1 Unit Testing
+    .content
+      h3 What to Test
+      ul
+        li A couple of "normal" input/output pairs
+        li All "boundary" inputs
+        li Any "pathological" entries that you can think of
+  section
+    h1 Unit Testing
+    .content
+      h3 What's wrong with this test?
+      code(data-gist-id="79ed2d4deb0440a621d2")
+  section
+    h1 Unit Testing
+    .content
+      h3 What's wrong with this test?
+      code(data-gist-id="79ed2d4deb0440a621d2")
+      ul
+        li Bad name
+        li Groups multiple behaviors
+        li No boundary conditions
+  section
+    h1 Unit Testing
+    .content
+      h3 Much Better
+      code(data-gist-id="bbeb3c6359f6b30bb38c")
   section
     h1 Unit Testing - Example
-    div.content
-      h3 Lots of unit test runners out there: Jest, Jasmine, etc. Most provide similar functionality.
+    .content
+      h3 Lots of unit test runners out there: Jest, Jasmine, etc.
       code(data-gist-id="e9098601057cb2ab2a23")
   section
-    div.content.title-slide
+    .content.title-slide
       h1.center Demo Time!
   section
     h1 Integration Testing
-    div.content
-  section
-    h1 Acceptance/Functional/End To End Testing
-    div.content
-      h3 Acceptance Testing
+    .content
+      h3 An Integration Test...
       ul
-        li Replaces manual QA by attempting to automate the end user of the software.
-        li Purely black box
+        li Tests the interaction of 2 components in isolation
+        li Treats the actual interaction as a black box
+        li Sets state on one component and verifies state on the other
+        li Mocks out everything else
+  section
+    h1 Integration Testing - Example
+    .content
+      h3 Usually test frameworks can handle both unit and integration tests
+      code(data-gist-id="01034defb0db9208cbf9")
+  section
+    .content.title-slide
+      h1.center A moment of demo
+  section
+    h1 End to End Testing
+    .content
+      h3 An End to End Test...
+      ul
+        li Aims to replace a manual QA process
+        li Emulates an end user interacting with your app
+        li Is purely black box for both input and verification (usually visual)
         li Goal is to ensure that the end user will accept the implementation
+      h6 a.k.a Acceptance Test, Functional Test
+  section
+    h1 End to End Testing - Example
+    .content
+      h3 Selenium using the Nightwatch API
+      code(data-gist-id="283691d3c687a7723f4f")
+  section
+    .content.title-slide
+      h1.center Super Shiny Demo
+  section
+    .content.title-slide
+      h1 Questions?
