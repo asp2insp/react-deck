@@ -5,6 +5,7 @@ var _ = require("lodash");
 var reactor = require("../../reactor.js");
 var presenterStore = require("./presenterStore.js");
 var NuclearReactMixin = require("nuclear-react-mixin");
+var cx = require("classnames");
 
 reactor.registerStores({
   presenter: presenterStore
@@ -29,7 +30,7 @@ var Presenter = React.createClass({
   goNext: function() {
     reactor.dispatch("goNext");
   },
-  handleKeyPress: function(e) {
+  handleKey: function(e) {
     console.log(e.keyCode)
     if (e.keyCode === 39) {
       reactor.dispatch("goNext");
@@ -47,7 +48,6 @@ var Presenter = React.createClass({
     var userClass = this.props.userClass;
     var mode = this.state.mode;
     var nodes = []
-    var keyHandler = this.handleKeyPress;
     _.forEach(this.props.slides, function(html, index) {
       var isCurrentSlide = currentSlideIndex == index;
       nodes.push(
@@ -59,9 +59,14 @@ var Presenter = React.createClass({
                key={index} />
       );
     });
+    var containerClasses = cx({
+      "slide-container": true,
+      "presentation": mode === "presentation",
+      "overview": mode === "overview"
+    });
     return (
-      <div className="presenter" onKeyUp={keyHandler}>
-        <div className="slide-container">
+      <div className="presenter" onKeyDown={this.handleKey} onKeyDownCapture={this.handleKey}>
+        <div className={containerClasses} >
           {nodes}
         </div>
         <div className="controls">
