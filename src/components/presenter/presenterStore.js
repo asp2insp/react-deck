@@ -1,19 +1,23 @@
 var Nuclear = require("nuclear-js");
 var Immutable = require("immutable");
 var Hash = require("../hash/hash.js");
+var $ = require("jquery");
 
 var presenterStore = Nuclear.Store({
   _hashImpl: Hash,
   getInitialState: function() {
     var hashString = this._hashImpl.getHash() || 0;
+
     return Immutable.Map({
       currentSlide: parseInt(hashString),
-      mode: "presentation"
+      mode: "presentation",
+      slides: []
     });
   },
 
   initialize: function() {
     var self = this;
+    $("body").append($("<div id=\"rd-hidden-content\">"));
     this.on("toggleMode", function(state) {
       var newMode = state.get("mode") === "presentation" ? "overview" : "presentation";
       return state.set("mode", newMode);
@@ -31,6 +35,17 @@ var presenterStore = Nuclear.Store({
     this.on("setCurrentSlide", function(state, input) {
       self._hashImpl.setHash(input);
       return state.set("currentSlide", input);
+    });
+    this.on("loadSlides", function(state, contentGenerator) {
+        var slideSelector = "section";
+        $(contentGenerator()).appendTo($("#rd-hidden-content"));
+        return state.set("slides",
+            $("#rd-hidden-content")
+                .find(slideSelector)
+                .map(function (index, slide) {
+                  return slide.innerHTML;
+                })
+        );
     });
   }
 });

@@ -31,8 +31,12 @@ var Presenter = React.createClass({
   getDataBindings: function() {
     return {
       currentSlide: ['presenter', 'currentSlide'],
-      mode: ['presenter', 'mode']
+      mode: ['presenter', 'mode'],
+      slides: ['presenter', 'slides']
     }
+  },
+  componentWillMount: function() {
+    reactor.dispatch("loadSlides", this.props.slideDom);
   },
   toggleMode: function() {
     reactor.dispatch("toggleMode");
@@ -48,7 +52,7 @@ var Presenter = React.createClass({
     var userClass = this.props.userClass;
     var mode = this.state.mode;
     var nodes = []
-    _.forEach(this.props.slides, function(html, index) {
+    _.forEach(this.state.slides, function(html, index) {
       var isCurrentSlide = currentSlideIndex == index;
       nodes.push(
         <Slide markup={html}
