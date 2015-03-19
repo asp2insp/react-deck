@@ -35,8 +35,8 @@ var Presenter = React.createClass({
       slides: ['presenter', 'slides']
     }
   },
-  getInitialState: function() {
-    reactor.dispatch("loadSlides", this.props.slideDom)
+  componentDidMount: function() {
+    reactor.dispatch("loadSlides", this.props.slideDom);
   },
   render: function() {
     var currentSlideIndex = this.state.currentSlide;
