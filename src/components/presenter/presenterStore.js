@@ -7,7 +7,6 @@ var presenterStore = Nuclear.Store({
   _hashImpl: Hash,
   getInitialState: function() {
     var hashString = this._hashImpl.getHash() || 0;
-
     return Immutable.Map({
       currentSlide: parseInt(hashString),
       mode: "presentation",
@@ -28,7 +27,8 @@ var presenterStore = Nuclear.Store({
       return state.set("currentSlide", nextIndex);
     });
     this.on("goNext", function(state) {
-      var nextIndex = state.get("currentSlide") + 1;
+      var lastSlide = state.get("slides").length - 1;
+      var nextIndex = Math.min(state.get("currentSlide") + 1, lastSlide);
       self._hashImpl.setHash(nextIndex);
       return state.set("currentSlide", nextIndex);
     });

@@ -35,17 +35,8 @@ var Presenter = React.createClass({
       slides: ['presenter', 'slides']
     }
   },
-  componentWillMount: function() {
-    reactor.dispatch("loadSlides", this.props.slideDom);
-  },
-  toggleMode: function() {
-    reactor.dispatch("toggleMode");
-  },
-  goPrevious: function() {
-    reactor.dispatch("goPrevious");
-  },
-  goNext: function() {
-    reactor.dispatch("goNext");
+  getInitialState: function() {
+    reactor.dispatch("loadSlides", this.props.slideDom)
   },
   render: function() {
     var currentSlideIndex = this.state.currentSlide;
@@ -72,11 +63,6 @@ var Presenter = React.createClass({
       <div className="presenter">
         <div className={containerClasses} >
           {nodes}
-        </div>
-        <div className="controls">
-          <button id="previous" type="button" onClick={this.goPrevious} >Previous</button>
-          <button id="toggle" type="button" onClick={this.toggleMode} >Toggle Mode</button>
-          <button id="next" type="button" onClick={this.goNext} >Next</button>
         </div>
       </div>
     );
